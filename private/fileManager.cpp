@@ -9,11 +9,18 @@ bool FileManager::init()
 {
     if (!m_stream.is_open())
     {
-        m_stream.open("settings.ini", std::ios::app | std::ios::in);
-        if (!m_stream.is_open())
-        {
-
-        }
+        m_stream.open("settings.ini", std::ios::app | std::ios::in | std::ios::out);
+        m_stream.seekg(0, m_stream.end);
+		if (m_stream.tellg() < 10)
+		{
+			m_stream.close();
+			m_stream.open("settings.ini", std::ios::trunc | std::ios::out);
+			m_stream << "currentCharacterSet ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789" << endl;
+			m_stream << "defaultPasswordLength 12" << endl;
+			m_stream << "passwordFilePath .\\" << endl;
+			m_stream.close();
+		}
+		m_stream.open("settings.ini", std::ios::in);
         while (!m_stream.eof())
         {
             string t_line;
