@@ -1,4 +1,4 @@
-#include ".\public\characterGenerator.hpp"
+#include "characterGenerator.hpp"
 #include <ctime>
 
 using std::time;
