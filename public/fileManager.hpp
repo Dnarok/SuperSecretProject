@@ -29,4 +29,5 @@ public:
 
     vector<char> getCurrentCharSet();
     void showAllData();
+    string getDatum(const string&);
 };

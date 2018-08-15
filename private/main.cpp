@@ -16,21 +16,40 @@ int main()
     FileManager t_fman;
     t_fman.init();
     CharacterGenerator t_cgen;
-    t_cgen.init();
+    t_cgen.init(t_fman.getCurrentCharSet());
 
     while (true)
     {
         cout << "What would you like to do?\n\t";
         getline(cin, t_command);
-        if (t_command == "generate")
+        if (t_command == "new password")
         {
+            string t_site;
+            string t_size;
+            cout << "What site is this for?\n\t";
+            getline(cin, t_site);
             cout << "How long should it be?\n\t";
-            getline(cin, t_command);
-            cout << endl;
-            for (size_t i = 0; i < stoi(t_command); i++)
-            {
-                cout << t_cgen.generate();
-            }
+            getline(cin, t_size);
+            t_fman.addDatum(t_site, t_cgen.generateStr(stoi(t_size)));
+            cout << "New password for " << t_site << ": \n\t" << t_fman.getDatum(t_site) << endl;
+        }
+        else if (t_command == "change password")
+        {
+            string t_site;
+            string t_size;
+            cout << "What site's password will be changed?\n\t";
+            getline(cin, t_site);
+            cout << "How long should the new password be?\n\t";
+            getline(cin, t_size);
+            t_fman.changeDatum(t_site, t_cgen.generateStr(stoi(t_size)));
+            cout << "New password for " << t_site << ": \n\t" << t_fman.getDatum(t_site) << endl;
+        }
+        else if (t_command == "get password")
+        {
+            string t_site;
+            cout << "The password for which site?\n\t";
+            getline(cin, t_site);
+            cout << "Password for " << t_site << " is: \n\t" << t_fman.getDatum(t_site) << endl;
         }
         else if (t_command == "change characters")
         {

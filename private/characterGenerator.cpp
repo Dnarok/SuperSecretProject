@@ -3,26 +3,9 @@
 
 using std::time;
 
-CharacterGenerator::CharacterGenerator() : 
-    m_gen{},
-    m_distrib{}
+void CharacterGenerator::init(const vector<char>& in_currentCharacters)
 {
-    m_currentCharacters =
-    {
-        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-        'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-        'w', 'x', 'y', 'z', '1', '2', '3', '4',
-        '5', '6', '7', '8', '9', '0', '!', '@',
-        '#', '$', '%', '^', '&', '*', '(', ')'
-    };
-}
-
-void CharacterGenerator::init()
-{
+    m_currentCharacters = in_currentCharacters;
     m_gen.seed(time(nullptr));
 }
 
@@ -34,4 +17,14 @@ char CharacterGenerator::generate()
 void CharacterGenerator::updateCurrentCharacters(const vector<char>& in_currentCharacters)
 {
     m_currentCharacters = in_currentCharacters;
+}
+
+string CharacterGenerator::generateStr(size_t in_size)
+{
+    string out_str = "";
+    for (size_t i = 0; i < in_size; i++)
+    {
+        out_str.push_back(generate());
+    }
+    return out_str;
 }
