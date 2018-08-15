@@ -36,6 +36,25 @@ bool FileManager::init()
         }
         m_stream.close();
         m_stream.open("data.txt");
+        m_stream.seekg(0, m_stream.end);
+        if (m_stream.tellg() > 10)
+        {
+            m_stream.seekg(0, m_stream.beg);
+            while (!m_stream.eof())
+            {
+                string t_line;
+                getline(m_stream, t_line);
+                if (!t_line.empty())
+                {
+                    m_data.insert
+                    (
+                        t_line.substr(0, t_line.find(' ') + 1),
+                        t_line.substr(t_line.find(' ') + 1)
+                    );
+                }
+            }
+        }
+        m_stream.close();
     }
     else 
     {
@@ -50,6 +69,7 @@ bool FileManager::changeSetting(const string& in_setting, const string& in_value
     {
         string t_line;
         string t_setting = "";
+        string t_settings = "";
         while (t_setting != in_setting)
         {
             if (getline(m_stream, t_line)) 
@@ -58,6 +78,5 @@ bool FileManager::changeSetting(const string& in_setting, const string& in_value
             }
             else return false;
         }
-        string t_settings = "";
     }
 }
