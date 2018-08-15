@@ -30,3 +30,12 @@ char CharacterGenerator::generate()
 {
     return m_currentCharacters.at(m_distrib(m_gen) % m_currentCharacters.size());
 }
+
+void CharacterGenerator::updateCurrentCharacters(const string& in_currentCharacters)
+{
+    m_currentCharacters.clear();
+    for (size_t i = 0; i < in_currentCharacters.size(); i++)
+    {
+        m_currentCharacters.push_back(in_currentCharacters.at(i));
+    }
+}

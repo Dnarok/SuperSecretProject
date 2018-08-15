@@ -2,10 +2,12 @@
 
 #include <random>
 #include <vector>
+#include <string>
 
 using std::mt19937_64;
 using std::uniform_int_distribution;
 using std::vector;
+using std::string;
 
 class CharacterGenerator
 {
@@ -19,4 +21,5 @@ public:
 
     void init();
     char generate();
+    void updateCurrentCharacters(const string&);
 };
