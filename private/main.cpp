@@ -51,6 +51,14 @@ int main()
             getline(cin, t_site);
             cout << "Password for " << t_site << " is: \n\t" << t_fman.getDatum(t_site) << endl;
         }
+        else if (t_command == "remove password")
+        {
+            string t_site;
+            cout << "The password for which site?\n\t";
+            getline(cin, t_site);
+            t_fman.removeDatum(t_site);
+            cout << "Password for " << t_site << " removed." << endl;
+        }
         else if (t_command == "change characters")
         {
             cout << "Enter your new characters: \n\t";

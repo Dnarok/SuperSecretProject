@@ -102,6 +102,17 @@ bool FileManager::changeDatum(const string& in_site, const string& in_datum)
     m_stream.close();
 }
 
+bool FileManager::removeDatum(const string& in_site)
+{
+    m_data.erase(in_site);
+    m_stream.open("data.txt", std::ios::trunc | std::ios::out);
+    for (auto a = m_data.begin(); a != m_data.end(); a++)
+    {
+        m_stream << a->first << ' ' << a->second << endl;
+    }
+    m_stream.close();
+}
+
 string FileManager::getDatum(const string& in_site)
 {
     return m_data[in_site];
